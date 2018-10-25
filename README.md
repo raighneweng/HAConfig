@@ -1,0 +1,2 @@
+# HAConfig
+HomeAssistant Config
