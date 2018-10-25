@@ -1,0 +1,136 @@
+
+raighnes_iphone:
+  hide_if_away: true
+  icon:
+  mac:
+  name: raighnes iphone
+  picture:
+  track: true
+
+yeelinklightceiling3_mibt72818817:
+  hide_if_away: false
+  icon:
+  mac: 78:11:DC:68:E2:B4
+  name: yeelink-light-ceiling3 mibt72818817
+  picture:
+  track: true
+
+raspberrypi:
+  hide_if_away: true
+  icon:
+  mac: B8:27:EB:86:B6:81
+  name: raspberrypi
+  picture:
+  track: true
+
+esp_4cb2a7:
+  hide_if_away: true
+  icon:
+  mac: 78:11:DC:4C:B2:A7
+  name: ESP 4CB2A7
+  picture:
+  track: true
+
+lumigatewayv3_miio87476047:
+  hide_if_away: true
+  icon:
+  mac: 7C:49:EB:1A:68:62
+  name: lumi-gateway-v3 miio87476047
+  picture:
+  track: true
+
+raighnemacbook2:
+  hide_if_away: true
+  icon:
+  mac: F4:5C:89:A4:53:83
+  name: RaighneMacBook2
+  picture:
+  track: true
+
+ipad:
+  hide_if_away: false
+  icon:
+  mac: C8:F6:50:F0:EF:EF
+  name: iPad
+  picture:
+  track: true
+
+raighnesiphone:
+  hide_if_away: false
+  icon:
+  mac: 20:AB:37:6E:56:4C
+  name: Raighnes-iPhone
+  picture:
+  track: true
+
+raighnesiphonex:
+  hide_if_away: false
+  icon:
+  mac: C8:3C:85:CE:B0:01
+  name: RaighnesiPhoneX
+  picture:
+  track: true
+
+otcloud_1398:
+  hide_if_away: true
+  icon:
+  mac: B0:D5:9D:D7:12:63
+  name: OTCloud 1398
+  picture:
+  track: true
+
+raighnepc:
+  hide_if_away: false
+  icon:
+  mac: AC:BC:32:8C:AB:4F
+  name: Raighne-PC
+  picture:
+  track: true
+
+yeelinklightceiling1_mibt77356508:
+  hide_if_away: false
+  icon:
+  mac: 78:11:DC:A6:1D:93
+  name: yeelink-light-ceiling1 mibt77356508
+  picture:
+  track: true
+
+yeelinklightceiling3_mibt72818662:
+  hide_if_away: false
+  icon:
+  mac: 78:11:DC:68:E2:19
+  name: yeelink-light-ceiling3 mibt72818662
+  picture:
+  track: true
+
+a002dc221e99:
+  hide_if_away: true
+  icon:
+  mac: A0:02:DC:22:1E:99
+  name: a002dc221e99
+  picture:
+  track: true
+
+yeelinklightceiling3_mibt72818656:
+  hide_if_away: false
+  icon:
+  mac: 78:11:DC:68:E2:13
+  name: yeelink-light-ceiling3 mibt72818656
+  picture:
+  track: true
+
+yeelinklightceiling4_mibt72543027:
+  hide_if_away: false
+  icon:
+  mac: 78:11:DC:64:AD:66
+  name: yeelink-light-ceiling4 mibt72543027
+  picture:
+  track: true
+
+002fd9eaf5f8:
+  hide_if_away: true
+  icon:
+  mac: 00:2F:D9:EA:F5:F8
+  name: 002fd9eaf5f8
+  picture:
+  track: true

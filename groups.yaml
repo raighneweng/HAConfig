@@ -1,0 +1,111 @@
+default_view:
+  name: ROOMS
+  view: yes
+  entities:
+    - group.Entrance   # 玄关
+    - group.LivingRoom
+    - group.DinnerRoom
+    - group.CookRoom
+    - group.BedRoom1
+    - group.BedRoom2
+    - group.BedRoom3
+
+devices_view:           # 这是整个 DEVICES 页的设置
+  name: DEVICES         # 显示名称
+  # icon: mdi:smartphone-link
+  view: yes      
+  entities:   #ROOM 分页下的组
+    - group.routermon
+  
+weather_view:           # 这是整个 WEATHER 页的设置
+  name: WEATHER         # 显示名称
+  view: yes             # 是否分页 即在页头显示
+  # icon: mdi:weather-partlycloudy
+  entities:
+    - group.Weatherclimate1
+    - group.Weatherclimate2
+    - group.Weatherclimate3
+
+Entrance:    #一个典型的 group， 这一行名字自定义
+  name: 玄关     # 显示名称
+  view: no     # 不分页，
+  icon: mdi:home-variant    # 组作为一个整体时的图标
+  entities:     #组下包含设备
+    # - sensor.HeWeather_tmp
+LivingRoom:
+  name: 客厅
+  view: no
+  icon: mdi:sofa
+  entities:
+    - sensor.Temperature_158d000239ab7e
+    - sensor.Humidity_158d000239ab7e
+    - cover.curtain_158d00027272a1
+    - light.yeelight_ceiling4_7811dc64ad66
+DinnerRoom:
+  name: 餐厅
+  view: no
+  icon: mdi:glass-tulip
+  entities:
+    - light.yeelight_ceiling_7811dca61d93
+CookRoom:
+  name: 厨房
+  view: no
+  icon: mdi:pot
+  entities:
+BedRoom1:
+  name: 主卧
+  view: no
+  icon: mdi:hotel
+  entities:
+    - light.yeelight_ceiling3_7811dc68e213
+BedRoom2:
+  name: 次卧
+  view: no
+  icon: mdi:hotel
+  entities:
+    - light.yeelight_ceiling3_7811dc68e2b4
+BedRoom3:
+  name: 北卧
+  view: no
+  icon: mdi:hotel
+  entities:
+    - light.yeelight_ceiling3_7811dc68e219
+
+
+Weatherclimate1:
+  name: 即时天气
+  view: no
+  entities:
+    - sensor.HeWeather_cond_txt
+    - sensor.HeWeather_fl
+    - sensor.HeWeather_tmp
+    - sensor.HeWeather_hum
+    - sensor.HeWeather_pcpn
+    - sensor.HeWeather_wind_spd
+    - sensor.HeWeather_drsg
+    - sensor.HeWeather_comf
+
+Weatherclimate2:
+  name: 空气质量
+  view: no
+  entities:
+    - sensor.HeWeather_qlty
+    - sensor.HeWeather_main
+    - sensor.HeWeather_aqi
+    - sensor.HeWeather_pm10
+    - sensor.HeWeather_pm25
+
+Weatherclimate3:
+  name: 其他
+  view: no
+  entities:
+    - sensor.HeWeather_flu
+    - sensor.HeWeather_sport
+    - sensor.HeWeather_uv
+    - sensor.HeWeather_trav
+    - sensor.HeWeather_pres
+    - sensor.HeWeather_vis
+    - sensor.HeWeather_wind_sc
+    - sensor.HeWeather_wind_dir
+    - sensor.HeWeather_cw
+    - sensor.HeWeather_vis

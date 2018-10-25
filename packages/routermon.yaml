@@ -1,0 +1,45 @@
+sensor:
+  - platform: asuswrt
+    host: 10.10.0.1 #你的路由器IP地址，必填
+    username: raighne #路由器登录用户名，必填
+    protocol: ssh #协议，填ssh或者telnet，默认ssh
+    port: 22 #ssh或telnet端口, 默认22
+    password: crazy1994 #如果使用密码登录，就在这里填密码
+    # ssh_key: #如果你使用sshkey登录，就在这里填私钥文件的路径
+    update_interval: '00:03:00' 
+      #更新间隔时间，默认1分钟，建议不低于30秒，不大于5分钟（过大会导致网速计算错误）
+    router_conditions:
+      - cpu  #可选项，CPU信息类
+      - mem  #可选项，内存信息类
+      - net  #可选项，网络信息类
+      - wifi #可选项，无线网络信息类
+            #可选项，不可描述
+
+group:
+  routermon:
+    name: 'ROUTER监控'
+    view: no
+    entities:
+      - sensor.router_name
+      - sensor.router_nowtime
+      - sensor.router_uptime
+      - sensor.router_cpu_temp
+      - sensor.router_cpu_1min_load
+      - sensor.router_cpu_5min_load
+      - sensor.router_cpu_15min_load
+      - sensor.router_mem_used
+      - sensor.router_mem_free
+      - sensor.router_mem_shrd
+      - sensor.router_mem_buff
+      - sensor.router_mem_cached
+      - sensor.router_net_mac
+      - sensor.router_net_wan_ip
+      - sensor.router_net_lan_ip
+      - sensor.router_net_wan_downspd
+      - sensor.router_net_wan_upspd
+      - sensor.router_wifi_24G_temp
+      - sensor.router_wifi_5G_temp
+      - sensor.router_wifi_24G_txpwr
+      - sensor.router_wifi_5G_txpwr
+      - sensor.router_wifi_24G_stalist
+      - sensor.router_wifi_5G_stalist
