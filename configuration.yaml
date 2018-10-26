@@ -1,6 +1,6 @@
 homeassistant:
-  packages: !include_dir_named packages
   # Name of the location where Home Assistant is running
+  packages: !include_dir_named packages
   name: Home
   # Location required to calculate the time the sun rises and sets
   latitude: 31.9865850952
@@ -24,15 +24,10 @@ frontend:
 config:
 
 http:
-  # Secrets are defined in the file secrets.yaml
-  trusted_networks:
-    - 127.0.0.1
-    - 10.10.0.1/24
-  api_password: !secret http
-  base_url: !secret http
-  # api_password: smpw7o9411
-  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  # base_url: example.duckdns.org:8123
+  base_url: http://crazywh.asuscomm.com:8090
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -45,26 +40,31 @@ updater:
 
 # Discover some devices automatically
 discovery:
+  # ignore:
+  #   - yeelight
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
 # Enables support for tracking state changes over time
 history:
-
+  exclude:
+    domains:
+    - sun
+    - group
+    - climate
+    - automation
+    - input_text
+    - input_select
+    - input_boolean
 # View all events in a logbook
 logbook:
 
 # Enables a map showing the location of tracked devices
 # map:
-# panel_custom:
-#   - name: inkwavemap
-#     sidebar_title: '地图'
-#     sidebar_icon: mdi:map
-#     url_path: inkwavemap
 
 # Track the sun
-# sun:
+sun:
 
 # Weather prediction
 # sensor:
@@ -76,7 +76,6 @@ tts:
 
 # Cloud
 cloud:
-ios:
 
 sensor: !include sensor.yaml
 group: !include groups.yaml
@@ -85,20 +84,41 @@ script: !include scripts.yaml
 
 xiaomi_aqara:
   gateways:
-    - mac: 
+    - mac:
       key: C63E942C94E54784
 
 light:
+  - platform: yeelight
+    devices:
+      10.10.0.97:
+        name: Living Room
+      10.10.0.213:
+        name: North Bedroom
+      10.10.0.115:
+        name: South Bedroom2
+      10.10.0.202:
+        name: Restaurant
+      10.10.0.207:
+        name: South Bedroom
 
 homekit:
   auto_start: true  
   port: 51827  
   filter: 
+    include_domains: 
+      - light
+      - sensor
+      - cover
+    include_entities:
+      - sensor.HeWeather_tmp
+      - sensor.HeWeather_aqi
+      - light.yeelight_ceiling3_7811dc68e2b4
+      - light.yeelight_ceiling3_7811dc68e219
+      - light.yeelight_ceiling3_7811dc68e213
+      - light.yeelight_ceiling_7811dca61d93
+      - light.yeelight_ceiling4_7811dc64ad66
     exclude_domains:
       - device_tracker 
-      - script
-      - automation
-      - input_boolean 
     exclude_entities:
       - device_tracker.esp_4cb2a7
       - device_tracker.raspberrypi
@@ -108,7 +128,32 @@ homekit:
       - device_tracker.002fd9eaf5f8
       - sensor.illumination_7c49eb1a6862
       - binary_sensor.switch_158d0002563504
-    # include_entities:
-    #   - sensor.HeWeather_tmp
-    #   - sensor.HeWeather_aqi
-    #   - light.yeelight_ceiling_7811dca61d93
+
+
+remote:
+  - platform: xiaomi_miio
+    name: "Liveing Romom Remote"
+    host: 10.10.0.182
+    token: f935fdd841d60c28ad1855e0af293bad
+    slot: 1
+    timeout: 30
+    hidden: false
+
+
+#
+modbus:
+  type: rtuovertcp
+  host: 10.10.0.7
+  port: 8899
+
+#
+climate:
+- platform: modbus
+  name: Daikin
+  temperature: {registers: [3,6,9,12], register_type: input, scale: 0.1}
+  target_temperature: {registers: [4,8,12,16]}
+  operation: {registers: [5,9,13,17]}
+  fan: {registers: [6,10,14,18]}
+  is_on: {registers: [1,2,3,4], register_type: coil}
+  operation_list: ['off', cool, heat, dry, fan]
+  fan_list: [自动, 一级, 二级, 三级, 四级, 五级]

@@ -2,3 +2,6 @@
 .db
 deps
 http.yaml
+core
+*.db
+secrets.yaml

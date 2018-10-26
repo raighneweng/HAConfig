@@ -1,58 +1,37 @@
 # weather
 sensor.HeWeather_tmp:
   friendly_name: 实时室外温度
-  homebridge_name: 实时室外温度
-  homebridge_visible: true
-  homebridge_sensor_type: humidity
 
 sensor.HeWeather_hum:
-  homebridge_hidden: true
-  device_class: moisture
+  friendly_name: 实时室外湿度
 
 sensor.HeWeather_aqi:
   friendly_name: 空气质量指数
-  homebridge_name: 空气质量指数
-  homebridge_visible: true
-  homebridge_sensor_type: air_quality
 
 sensor.Temperature_158d000239ab7e:
-  homebridge_name: 客厅温度
-  homebridge_visible: true
+  friendly_name: 客厅温度
 
 sensor.Humidity_158d000239ab7e:
-  homebridge_name: 客厅湿度
-  homebridge_visible: true
+  friendly_name: 客厅湿度
 
 light.yeelight_ceiling3_7811dc68e219:
   friendly_name: 北卧主灯
-  homebridge_name: 北卧主灯
-  homebridge_visible: true
 
 light.yeelight_ceiling3_7811dc68e2b4:
-  friendly_name: 主卧主灯
-  homebridge_name: 次卧主灯
-  homebridge_visible: true
+  friendly_name: 次卧主灯
 
 light.yeelight_ceiling3_7811dc68e213:
   friendly_name: 主卧主灯
-  homebridge_name: 主卧主灯
-  homebridge_visible: true
 
 light.yeelight_ceiling_7811dca61d93:
   friendly_name: 餐厅主灯
-  homebridge_name: 餐厅主灯
   homebridge_visible: true
 
 light.yeelight_ceiling4_7811dc64ad66:
   friendly_name: 客厅主灯
-  homebridge_name: 客厅主灯
-  homebridge_visible: true
 
 cover.curtain_158d00027272a1:
   friendly_name: 客厅窗帘
-  homebridge_cover_type: rollershutter
-  homebridge_name: 客厅窗帘
-  homebridge_visible: true
 
 # BUffer
 sensor.HeWeather_cond_txt:
@@ -111,3 +90,9 @@ sensor.HeWeather_uv:
   
 sensor.HeWeather_trav:
   homebridge_hidden: true  
+
+sensor.temperature_158d000239ab7e:
+  friendly_name: 客厅温度
+
+sensor.humidity_158d000239ab7e:
+  friendly_name: 客厅湿度
