@@ -1,159 +1,76 @@
-homeassistant:
-  # Name of the location where Home Assistant is running
-  packages: !include_dir_named packages
-  name: Home
-  # Location required to calculate the time the sun rises and sets
-  latitude: 31.9865850952
-  longitude: 118.7766127399
-  # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: 0
-  # metric for Metric, imperial for Imperial
-  unit_system: metric
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: Asia/Shanghai
-  # Customization file
-  customize: !include customize.yaml
-
-# Show links to resources in log and frontend
-# introduction:
-
-# Enables the frontend
-frontend:
-
-# Enables configuration UI
-config:
-
-http:
-  base_url: http://crazywh.asuscomm.com:8090
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
-
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
-
-# Discover some devices automatically
-discovery:
-  # ignore:
-  #   - yeelight
-
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
-
-# Enables support for tracking state changes over time
-history:
-  exclude:
-    domains:
-    - sun
-    - group
-    - climate
-    - automation
-    - input_text
-    - input_select
-    - input_boolean
-# View all events in a logbook
-logbook:
-
-# Enables a map showing the location of tracked devices
-# map:
-
-# Track the sun
-sun:
-
-# Weather prediction
-# sensor:
-#   - platform: yr
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
 
-# Cloud
-cloud:
+history:
+  exclude:
+    domains:
+      - sun
+      - group
+      - script
+      - climate
+      - automation
+      - input_text
+      - input_select
+      - input_boolean
 
-sensor: !include sensor.yaml
+sun:
+  hidden: true
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+scene: !include scenes.yaml
 
-xiaomi_aqara:
-  gateways:
-    - mac:
-      key: C63E942C94E54784
+modbus:
+  type: rtuovertcp
+  host: 10.10.0.139
+  port: 502
 
-light:
-  - platform: yeelight
-    devices:
-      10.10.0.97:
-        name: Living Room
-      10.10.0.213:
-        name: North Bedroom
-      10.10.0.115:
-        name: South Bedroom2
-      10.10.0.202:
-        name: Restaurant
-      10.10.0.207:
-        name: South Bedroom
+climate:
+  - platform: modbus2
+    name: [客厅空调, 主卧空调, 次卧空调, 书房空调]
+    fan_mode: { registers: [6, 10, 14, 18] }
+    fan_modes: { auto: 0, 一级: 1, 二级: 2, 三级: 3, 四级: 4, 五级: 5 }
+    hvac_mode: { registers: [5, 9, 13, 17] }
+    hvac_modes: { "off": 0, cool: 1, heat: 2, dry: 3, fan_only: 4 }
+    hvac_off: { registers: [1, 2, 3, 4], register_type: coil }
+    target_temperature: { registers: [4, 8, 12, 16] }
+    temperature: { registers: [3, 6, 9, 12], register_type: input, scale: 0.1 }
 
-homekit:
-  auto_start: true  
-  port: 51827  
-  filter: 
-    include_domains: 
-      - light
-      - sensor
-      - cover
-    include_entities:
-      - sensor.HeWeather_tmp
-      - sensor.HeWeather_aqi
-      - light.yeelight_ceiling3_7811dc68e2b4
-      - light.yeelight_ceiling3_7811dc68e219
-      - light.yeelight_ceiling3_7811dc68e213
-      - light.yeelight_ceiling_7811dca61d93
-      - light.yeelight_ceiling4_7811dc64ad66
-    exclude_domains:
-      - device_tracker 
-    exclude_entities:
-      - device_tracker.esp_4cb2a7
-      - device_tracker.raspberrypi
-      - device_tracker.raighnemacbook2
-      - device_tracker.otcloud_1398
-      - device_tracker.a002dc221e99
-      - device_tracker.002fd9eaf5f8
-      - sensor.illumination_7c49eb1a6862
-      - binary_sensor.switch_158d0002563504
+fan:
+  - platform: xiaomi_miio
+    name: Xiaomi Air Purifier 2
+    host: 10.10.0.181
+    token: !secret purifier_token
+    model: zhimi.airpurifier.m2
 
+yeelight:
+  devices:
+    10.10.0.212:
+      name: 客厅灯
+      save_on_change: False
+    10.10.0.213:
+      name: 主卧灯
+      save_on_change: False
+    10.10.0.152:
+      name: 书房灯
+      save_on_change: False
+    10.10.0.131:
+      name: 餐厅灯
+      save_on_change: False
+    10.10.0.157:
+      name: 次卧灯
+      save_on_change: False
 
 remote:
   - platform: xiaomi_miio
-    name: "Liveing Romom Remote"
-    host: 10.10.0.182
-    token: f935fdd841d60c28ad1855e0af293bad
+    host: 10.10.0.199
+    token: !secret ir_token
+    name: "IR remote"
     slot: 1
     timeout: 30
     hidden: false
-
-
-#
-modbus:
-  type: rtuovertcp
-  host: 10.10.0.7
-  port: 8899
-
-#
-climate:
-- platform: modbus
-  name: Daikin
-  temperature: {registers: [3,6,9,12], register_type: input, scale: 0.1}
-  target_temperature: {registers: [4,8,12,16]}
-  operation: {registers: [5,9,13,17]}
-  fan: {registers: [6,10,14,18]}
-  is_on: {registers: [1,2,3,4], register_type: coil}
-  operation_list: ['off', cool, heat, dry, fan]
-  fan_list: [自动, 一级, 二级, 三级, 四级, 五级]
