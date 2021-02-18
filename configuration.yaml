@@ -53,7 +53,7 @@ yeelight:
     10.10.0.212:
       name: 客厅灯
       save_on_change: False
-    10.10.0.213:
+    10.10.0.146:
       name: 主卧灯
       save_on_change: False
     10.10.0.152:
